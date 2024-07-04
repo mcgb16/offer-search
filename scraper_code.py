@@ -5,8 +5,8 @@ class Scraper():
         self.content = content
         self.soup = BeautifulSoup(self.content, 'html.parser')
 
-    def get_href_all(self, param, search_class) -> list:
-        all_links = self.soup.find_all(param, class_= search_class)
+    def get_href_all(self, tag, search_class) -> list:
+        all_links = self.soup.find_all(tag, class_= search_class)
         links = []
         
         for l in all_links:
@@ -14,8 +14,8 @@ class Scraper():
 
         return links
     
-    def get_text_all(self, param, search_class) -> list:
-        all_response = self.soup.find_all(param, class_= search_class)
+    def get_text_all(self, tag, search_class) -> list:
+        all_response = self.soup.find_all(tag, class_= search_class)
         response_list = []
         
         for l in all_response:

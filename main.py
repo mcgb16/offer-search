@@ -1,5 +1,5 @@
-import scraper_code
-import get_requests_code
+import base_code.scraper_code as scraper_code
+import base_code.get_requests_code as get_requests_code
 import sites.kabum as kabum
 
 if __name__ == "__main__":

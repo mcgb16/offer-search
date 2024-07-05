@@ -1,11 +1,15 @@
-import requests
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+driver = webdriver.Chrome(options=chrome_options)
 
 def get_response(url) -> str:
-    response = requests.get(url)
 
-    if response.status_code == 200:
-        content = response.text
-        return content
-    else:
-        error_message = f"Falha na requisição. Status code: {response.status_code}"
-        return error_message
+    driver.get(url)
+
+    html = driver.page_source
+    driver.quit()
+
+    return html

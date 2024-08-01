@@ -38,8 +38,9 @@ if __name__ == "__main__":
 
     for i in range(10):
         print(kabum_product_names_list[i])
-        print(kabum_old_price_list[i])
+        if kabum_old_price_list[i] != '':
+            print(kabum_discount_list[i])
+            print(kabum_old_price_list[i])
         print(kabum_current_price_list[i])
-        # print(kabum_discount_list[i])
         print(kabum_product_link_list[i])
 

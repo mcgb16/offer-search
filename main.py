@@ -24,9 +24,15 @@ if __name__ == "__main__":
 
     kabum_current_price_list = kabum_soup.get_text_all(kabum_current_price_tag, kabum_current_price_class)
 
+    # Pegar a tag e a classe do componente que contém os descontos.
+
+    kabum_discount_tag, kabum_discount_class = kabum.get_kabum_dicount_class_tag()
+
+    kabum_discount_list = kabum_soup.get_text_all(kabum_discount_tag, kabum_discount_class)
+
     for i in range(10):
         print(kabum_product_names_list[i])
         print(kabum_old_price_list[i])
         print(kabum_current_price_list[i])
+        print(kabum_discount_list[i])
 
-    # Pegar a tag e a classe do componente que contém os descontos.

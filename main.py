@@ -30,9 +30,16 @@ if __name__ == "__main__":
 
     kabum_discount_list = kabum_soup.get_text_all(kabum_discount_tag, kabum_discount_class)
 
+    # Pegar a tag e a classe do componente que contém os links dos produtos.
+
+    kabum_product_link_tag, kabum_product_link_class = kabum.get_kabum_product_link_class_tag()
+
+    kabum_product_link_list = kabum_soup.get_href_all(kabum_product_link_tag, kabum_product_link_class)
+
     for i in range(10):
         print(kabum_product_names_list[i])
         print(kabum_old_price_list[i])
         print(kabum_current_price_list[i])
-        print(kabum_discount_list[i])
+        # print(kabum_discount_list[i])
+        print(kabum_product_link_list[i])
 

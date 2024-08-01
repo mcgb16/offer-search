@@ -12,7 +12,8 @@ kabum_html_specified = {
     'product_name' : ('span','nameCard'),
     'old_price' : ('span', 'oldPriceCard'),
     'current_price' : ('span', 'priceCard'),
-    'discount' : ('div', 'discountTagCard')
+    'discount' : ('div', 'discountTagCard'),
+    'product_link' : ('a', 'productLink')
 }
 
 def get_kabum_search_url(product, page) -> str:
@@ -31,3 +32,6 @@ def get_kabum_current_price_class_tag() -> tuple:
 
 def get_kabum_dicount_class_tag() -> tuple:
     return kabum_html_specified['discount']
+
+def get_kabum_product_link_class_tag() -> tuple:
+    return kabum_html_specified['product_link']

@@ -1,46 +1,59 @@
 import base_code.scraper_code as scraper_code
 import base_code.get_requests_code as get_requests_code
 import sites.kabum as kabum
+import sites.pichau as pichau
 
 if __name__ == "__main__":
     input_search = input('Digite o que deseja procurar: ')
 
-    kabum_search = kabum.get_kabum_search_url(input_search, page='1')
+    # kabum_search = kabum.get_kabum_search_url(input_search, page='1')
 
-    kabum_html = get_requests_code.get_response(kabum_search)
+    # kabum_html = get_requests_code.get_response(kabum_search)
 
-    kabum_soup = scraper_code.Scraper(kabum_html)
+    # kabum_soup = scraper_code.Scraper(kabum_html)
 
-    # Pegar a tag e a classe do componente que contém os nomes dos produtos.
-    kabum_product_name_tag, kabum_product_name_class = kabum.get_kabum_product_class_tag()
+    # # Pegar a tag e a classe do componente que contém os nomes dos produtos.
+    # kabum_product_name_tag, kabum_product_name_class = kabum.get_kabum_product_class_tag()
 
-    kabum_product_names_list = kabum_soup.get_text_all(kabum_product_name_tag, kabum_product_name_class)
+    # kabum_product_names_list = kabum_soup.get_text_all(kabum_product_name_tag, kabum_product_name_class)
 
-    # Pegar a tag e a classe do componente que contém os preços.
-    kabum_old_price_tag, kabum_old_price_class = kabum.get_kabum_old_price_class_tag()
-    kabum_current_price_tag, kabum_current_price_class = kabum.get_kabum_current_price_class_tag()
+    # # Pegar a tag e a classe do componente que contém os preços.
+    # kabum_old_price_tag, kabum_old_price_class = kabum.get_kabum_old_price_class_tag()
+    # kabum_current_price_tag, kabum_current_price_class = kabum.get_kabum_current_price_class_tag()
 
-    kabum_old_price_list = kabum_soup.get_text_all(kabum_old_price_tag, kabum_old_price_class)
+    # kabum_old_price_list = kabum_soup.get_text_all(kabum_old_price_tag, kabum_old_price_class)
 
-    kabum_current_price_list = kabum_soup.get_text_all(kabum_current_price_tag, kabum_current_price_class)
+    # kabum_current_price_list = kabum_soup.get_text_all(kabum_current_price_tag, kabum_current_price_class)
 
-    # Pegar a tag e a classe do componente que contém os descontos.
+    # # Pegar a tag e a classe do componente que contém os descontos.
 
-    kabum_discount_tag, kabum_discount_class = kabum.get_kabum_dicount_class_tag()
+    # kabum_discount_tag, kabum_discount_class = kabum.get_kabum_dicount_class_tag()
 
-    kabum_discount_list = kabum_soup.get_text_all(kabum_discount_tag, kabum_discount_class)
+    # kabum_discount_list = kabum_soup.get_text_all(kabum_discount_tag, kabum_discount_class)
 
-    # Pegar a tag e a classe do componente que contém os links dos produtos.
+    # # Pegar a tag e a classe do componente que contém os links dos produtos.
 
-    kabum_product_link_tag, kabum_product_link_class = kabum.get_kabum_product_link_class_tag()
+    # kabum_product_link_tag, kabum_product_link_class = kabum.get_kabum_product_link_class_tag()
 
-    kabum_product_link_list = kabum_soup.get_href_all(kabum_product_link_tag, kabum_product_link_class)
+    # kabum_product_link_list = kabum_soup.get_href_all(kabum_product_link_tag, kabum_product_link_class)
 
-    for i in range(10):
-        print(kabum_product_names_list[i])
-        if kabum_old_price_list[i] != '':
-            print(kabum_discount_list[i])
-            print(kabum_old_price_list[i])
-        print(kabum_current_price_list[i])
-        print(kabum_product_link_list[i])
+    # for i in range(10):
+    #     print(kabum_product_names_list[i])
+    #     if kabum_old_price_list[i] != '':
+    #         print(kabum_discount_list[i])
+    #         print(kabum_old_price_list[i])
+    #     print(kabum_current_price_list[i])
+    #     print(kabum_product_link_list[i])
+
+    pichau_search = pichau.get_pichau_search_url(input_search, page='1')
+    pichau_html = get_requests_code.get_response(pichau_search)
+
+    pichau_soup = scraper_code.Scraper(pichau_html)
+    
+    pichau_product_name_tag, pichau_product_name_class = pichau.get_pichau_product_class_tag()
+
+    pichau_product_names_list = pichau_soup.get_text_all(pichau_product_name_tag, pichau_product_name_class)
+
+    for i in range (10):
+        print(pichau_product_names_list[i])
 

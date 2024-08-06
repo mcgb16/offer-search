@@ -7,10 +7,10 @@ pichau = {
 
 pichau_html_specified = {
     'product_name' : ('h2','MuiTypography-h6'),
-    'old_price' : ('', ''),
-    'current_price' : ('', ''),
-    'discount' : ('', ''),
-    'product_link' : ('', '')
+    'old_price' : ('span', 'jss303'),
+    'current_price' : ('div', 'jss277'),
+    'all_prices' : ('div', 'jss289'),
+    'product_link' : ('a', 'jss188')
 }
 
 def get_pichau_search_url(product, page) -> str:

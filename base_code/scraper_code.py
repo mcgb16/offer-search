@@ -23,3 +23,8 @@ class Scraper():
 
         return response_list
     
+    def get_soup_all(self, tag, search_class) -> list:
+        all_response = self.soup.find_all(tag, class_= search_class)
+        
+        return all_response
+    

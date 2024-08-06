@@ -36,7 +36,7 @@ if __name__ == "__main__":
     # kabum_product_link_tag, kabum_product_link_class = kabum.get_kabum_product_link_class_tag()
 
     # kabum_product_link_list = kabum_soup.get_href_all(kabum_product_link_tag, kabum_product_link_class)
-
+    # # Mesmo em situações que não tenha "old_price", ou seja, produtos que não estejam na promoção, este componente possui um valor, porém é um valor "vazio", por isso é possível sempre ter noção de quais são os valores e seus respectivos descontos sem um tratamento de dados mais detalhado.
     # for i in range(10):
     #     print(kabum_product_names_list[i])
     #     if kabum_old_price_list[i] != '':
@@ -54,6 +54,30 @@ if __name__ == "__main__":
 
     pichau_product_names_list = pichau_soup.get_text_all(pichau_product_name_tag, pichau_product_name_class)
 
-    for i in range (10):
+    pichau_old_price_tag, pichau_old_price_class = pichau.get_pichau_old_price_class_tag()
+    pichau_current_price_tag, pichau_current_price_class = pichau.get_pichau_current_price_class_tag()
+    pichau_all_prices_tag, pichau_all_prices_class = pichau.get_pichau_all_prices_class_tag()
+
+    pichau_all_prices_list = pichau_soup.get_soup_all(pichau_all_prices_tag, pichau_all_prices_class)
+    pichau_current_price_list = []
+    pichau_old_price_list = []
+
+    for i in pichau_all_prices_list:
+        old_price_item = i.find(pichau_old_price_tag, pichau_old_price_class)
+        current_price_item = i.find(pichau_current_price_tag, pichau_current_price_class)
+        if old_price_item:
+            pichau_old_price_list.append(old_price_item.get_text())
+            pichau_current_price_list.append(current_price_item.get_text())
+        else:
+            pichau_old_price_list.append('')
+            pichau_current_price_list.append(current_price_item.get_text())            
+
+    pichau_product_link_tag, pichau_product_link_class = pichau.get_pichau_product_link_class_tag()
+    pichau_product_link_list = pichau_soup.get_href_all(pichau_product_link_tag, pichau_product_link_class)
+
+    for i in range (36):
         print(pichau_product_names_list[i])
+        print(pichau_old_price_list[i])
+        print(pichau_current_price_list[i])
+        print(pichau_product_link_list[i+8])
 

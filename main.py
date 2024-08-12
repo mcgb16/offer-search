@@ -3,6 +3,7 @@ import base_code.get_requests_code as get_requests_code
 import sites.kabum as kabum
 import sites.pichau as pichau
 import sites.terabyte as terabyte
+import sites.magalu as magalu
 
 if __name__ == "__main__":
     input_search = input('Digite o que deseja procurar: ')
@@ -88,38 +89,76 @@ if __name__ == "__main__":
 
     #TERABYTE
 
-    terabyte_search = terabyte.get_terabyte_search_url(input_search, page='1')
-    terabyte_html = get_requests_code.get_response(terabyte_search)
+    # terabyte_search = terabyte.get_terabyte_search_url(input_search, page='1')
+    # terabyte_html = get_requests_code.get_response(terabyte_search)
 
-    terabyte_soup = scraper_code.Scraper(terabyte_html)
+    # terabyte_soup = scraper_code.Scraper(terabyte_html)
     
-    terabyte_product_name_tag, terabyte_product_name_class = terabyte.get_terabyte_product_class_tag()
+    # terabyte_product_name_tag, terabyte_product_name_class = terabyte.get_terabyte_product_class_tag()
 
-    terabyte_product_names_list = terabyte_soup.get_text_all(terabyte_product_name_tag, terabyte_product_name_class)
+    # terabyte_product_names_list = terabyte_soup.get_text_all(terabyte_product_name_tag, terabyte_product_name_class)
 
-    terabyte_old_price_tag, terabyte_old_price_class = terabyte.get_terabyte_old_price_class_tag()
-    terabyte_current_price_tag, terabyte_current_price_class = terabyte.get_terabyte_current_price_class_tag()
-    terabyte_all_prices_tag, terabyte_all_prices_class = terabyte.get_terabyte_all_prices_class_tag()
+    # terabyte_old_price_tag, terabyte_old_price_class = terabyte.get_terabyte_old_price_class_tag()
+    # terabyte_current_price_tag, terabyte_current_price_class = terabyte.get_terabyte_current_price_class_tag()
+    # terabyte_all_prices_tag, terabyte_all_prices_class = terabyte.get_terabyte_all_prices_class_tag()
 
-    terabyte_all_prices_list = terabyte_soup.get_soup_all(terabyte_all_prices_tag, terabyte_all_prices_class)
-    terabyte_current_price_list = []
-    terabyte_old_price_list = []
+    # terabyte_all_prices_list = terabyte_soup.get_soup_all(terabyte_all_prices_tag, terabyte_all_prices_class)
+    # terabyte_current_price_list = []
+    # terabyte_old_price_list = []
 
-    for i in terabyte_all_prices_list:
-        old_price_item = i.find(terabyte_old_price_tag, terabyte_old_price_class)
-        current_price_item = i.find(terabyte_current_price_tag, terabyte_current_price_class)
+    # for i in terabyte_all_prices_list:
+    #     old_price_item = i.find(terabyte_old_price_tag, terabyte_old_price_class)
+    #     current_price_item = i.find(terabyte_current_price_tag, terabyte_current_price_class)
+    #     if old_price_item:
+    #         terabyte_old_price_list.append(old_price_item.get_text())
+    #         terabyte_current_price_list.append(current_price_item.get_text())
+    #     else:
+    #         terabyte_old_price_list.append('')
+    #         terabyte_current_price_list.append(current_price_item.get_text())            
+
+    # terabyte_product_link_tag, terabyte_product_link_class = terabyte.get_terabyte_product_link_class_tag()
+    # terabyte_product_link_list = terabyte_soup.get_href_all(terabyte_product_link_tag, terabyte_product_link_class)
+
+    # for i in range (36):
+    #     print(terabyte_product_names_list[i])
+    #     print(terabyte_old_price_list[i])
+    #     print(terabyte_current_price_list[i])
+    #     print(terabyte_product_link_list[i])
+
+    #MAGAZINE LUIZA
+
+    magalu_search = magalu.get_magalu_search_url(input_search, page='1')
+    magalu_html = get_requests_code.get_response(magalu_search)
+
+    magalu_soup = scraper_code.Scraper(magalu_html)
+    
+    magalu_product_name_tag, magalu_product_name_testid = magalu.get_magalu_product_testid_tag()
+
+    magalu_product_names_list = magalu_soup.get_text_all_data_testid(magalu_product_name_tag, magalu_product_name_testid)
+
+    magalu_old_price_tag, magalu_old_price_testid = magalu.get_magalu_old_price_testid_tag()
+    magalu_current_price_tag, magalu_current_price_testid = magalu.get_magalu_current_price_testid_tag()
+    magalu_all_prices_tag, magalu_all_prices_testid = magalu.get_magalu_all_prices_testid_tag()
+
+    magalu_all_prices_list = magalu_soup.get_soup_all_data_testid(magalu_all_prices_tag, magalu_all_prices_testid)
+    magalu_current_price_list = []
+    magalu_old_price_list = []
+
+    for i in magalu_all_prices_list:
+        old_price_item = i.find(magalu_old_price_tag, attrs={"data-testid":magalu_old_price_testid})
+        current_price_item = i.find(magalu_current_price_tag, attrs={"data-testid":magalu_current_price_testid})
         if old_price_item:
-            terabyte_old_price_list.append(old_price_item.get_text())
-            terabyte_current_price_list.append(current_price_item.get_text())
+            magalu_old_price_list.append(old_price_item.get_text())
+            magalu_current_price_list.append(current_price_item.get_text())
         else:
-            terabyte_old_price_list.append('')
-            terabyte_current_price_list.append(current_price_item.get_text())            
+            magalu_old_price_list.append('')
+            magalu_current_price_list.append(current_price_item.get_text())            
 
-    terabyte_product_link_tag, terabyte_product_link_class = terabyte.get_terabyte_product_link_class_tag()
-    terabyte_product_link_list = terabyte_soup.get_href_all(terabyte_product_link_tag, terabyte_product_link_class)
+    magalu_product_link_tag, magalu_product_link_testid = magalu.get_magalu_product_link_testid_tag()
+    magalu_product_link_list = magalu_soup.get_href_all_data_testid(magalu_product_link_tag, magalu_product_link_testid)
 
     for i in range (36):
-        print(terabyte_product_names_list[i])
-        print(terabyte_old_price_list[i])
-        print(terabyte_current_price_list[i])
-        print(terabyte_product_link_list[i])
+        print(magalu_product_names_list[i])
+        print(magalu_old_price_list[i])
+        print(magalu_current_price_list[i])
+        print(magalu_product_link_list[i])

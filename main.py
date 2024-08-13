@@ -4,6 +4,7 @@ import sites.kabum as kabum
 import sites.pichau as pichau
 import sites.terabyte as terabyte
 import sites.magalu as magalu
+import sites.americanas as americanas
 
 if __name__ == "__main__":
     input_search = input('Digite o que deseja procurar: ')
@@ -127,38 +128,76 @@ if __name__ == "__main__":
 
     #MAGAZINE LUIZA
 
-    magalu_search = magalu.get_magalu_search_url(input_search, page='1')
-    magalu_html = get_requests_code.get_response(magalu_search)
+    # magalu_search = magalu.get_magalu_search_url(input_search, page='1')
+    # magalu_html = get_requests_code.get_response(magalu_search)
 
-    magalu_soup = scraper_code.Scraper(magalu_html)
+    # magalu_soup = scraper_code.Scraper(magalu_html)
     
-    magalu_product_name_tag, magalu_product_name_testid = magalu.get_magalu_product_testid_tag()
+    # magalu_product_name_tag, magalu_product_name_testid = magalu.get_magalu_product_testid_tag()
 
-    magalu_product_names_list = magalu_soup.get_text_all_data_testid(magalu_product_name_tag, magalu_product_name_testid)
+    # magalu_product_names_list = magalu_soup.get_text_all_data_testid(magalu_product_name_tag, magalu_product_name_testid)
 
-    magalu_old_price_tag, magalu_old_price_testid = magalu.get_magalu_old_price_testid_tag()
-    magalu_current_price_tag, magalu_current_price_testid = magalu.get_magalu_current_price_testid_tag()
-    magalu_all_prices_tag, magalu_all_prices_testid = magalu.get_magalu_all_prices_testid_tag()
+    # magalu_old_price_tag, magalu_old_price_testid = magalu.get_magalu_old_price_testid_tag()
+    # magalu_current_price_tag, magalu_current_price_testid = magalu.get_magalu_current_price_testid_tag()
+    # magalu_all_prices_tag, magalu_all_prices_testid = magalu.get_magalu_all_prices_testid_tag()
 
-    magalu_all_prices_list = magalu_soup.get_soup_all_data_testid(magalu_all_prices_tag, magalu_all_prices_testid)
-    magalu_current_price_list = []
-    magalu_old_price_list = []
+    # magalu_all_prices_list = magalu_soup.get_soup_all_data_testid(magalu_all_prices_tag, magalu_all_prices_testid)
+    # magalu_current_price_list = []
+    # magalu_old_price_list = []
 
-    for i in magalu_all_prices_list:
-        old_price_item = i.find(magalu_old_price_tag, attrs={"data-testid":magalu_old_price_testid})
-        current_price_item = i.find(magalu_current_price_tag, attrs={"data-testid":magalu_current_price_testid})
+    # for i in magalu_all_prices_list:
+    #     old_price_item = i.find(magalu_old_price_tag, attrs={"data-testid":magalu_old_price_testid})
+    #     current_price_item = i.find(magalu_current_price_tag, attrs={"data-testid":magalu_current_price_testid})
+    #     if old_price_item:
+    #         magalu_old_price_list.append(old_price_item.get_text())
+    #         magalu_current_price_list.append(current_price_item.get_text())
+    #     else:
+    #         magalu_old_price_list.append('')
+    #         magalu_current_price_list.append(current_price_item.get_text())            
+
+    # magalu_product_link_tag, magalu_product_link_testid = magalu.get_magalu_product_link_testid_tag()
+    # magalu_product_link_list = magalu_soup.get_href_all_data_testid(magalu_product_link_tag, magalu_product_link_testid)
+
+    # for i in range (36):
+    #     print(magalu_product_names_list[i])
+    #     print(magalu_old_price_list[i])
+    #     print(magalu_current_price_list[i])
+    #     print(magalu_product_link_list[i])
+
+    # AMERICANAS
+    
+    americanas_search = americanas.get_americanas_search_url(input_search, page='1')
+    americanas_html = get_requests_code.get_response(americanas_search)
+
+    americanas_soup = scraper_code.Scraper(americanas_html)
+    
+    americanas_product_name_tag, americanas_product_name_class = americanas.get_americanas_product_class_tag()
+
+    americanas_product_names_list = americanas_soup.get_text_all(americanas_product_name_tag, americanas_product_name_class)
+
+    americanas_old_price_tag, americanas_old_price_class = americanas.get_americanas_old_price_class_tag()
+    americanas_current_price_tag, americanas_current_price_class = americanas.get_americanas_current_price_class_tag()
+    americanas_all_prices_tag, americanas_all_prices_class = americanas.get_americanas_all_prices_class_tag()
+
+    americanas_all_prices_list = americanas_soup.get_soup_all(americanas_all_prices_tag, americanas_all_prices_class)
+    americanas_current_price_list = []
+    americanas_old_price_list = []
+
+    for i in americanas_all_prices_list:
+        old_price_item = i.find(americanas_old_price_tag, attrs={"class":americanas_old_price_class})
+        current_price_item = i.find(americanas_current_price_tag, attrs={"class":americanas_current_price_class})
         if old_price_item:
-            magalu_old_price_list.append(old_price_item.get_text())
-            magalu_current_price_list.append(current_price_item.get_text())
+            americanas_old_price_list.append(old_price_item.get_text())
+            americanas_current_price_list.append(current_price_item.get_text())
         else:
-            magalu_old_price_list.append('')
-            magalu_current_price_list.append(current_price_item.get_text())            
+            americanas_old_price_list.append('')
+            americanas_current_price_list.append(current_price_item.get_text())            
 
-    magalu_product_link_tag, magalu_product_link_testid = magalu.get_magalu_product_link_testid_tag()
-    magalu_product_link_list = magalu_soup.get_href_all_data_testid(magalu_product_link_tag, magalu_product_link_testid)
+    americanas_product_link_tag, americanas_product_link_class = americanas.get_americanas_product_link_class_tag()
+    americanas_product_link_list = americanas_soup.get_href_all(americanas_product_link_tag, americanas_product_link_class)
 
-    for i in range (36):
-        print(magalu_product_names_list[i])
-        print(magalu_old_price_list[i])
-        print(magalu_current_price_list[i])
-        print(magalu_product_link_list[i])
+    for i in range (15):
+        print(americanas_product_names_list[i])
+        print(americanas_old_price_list[i])
+        print(americanas_current_price_list[i])
+        print(americanas_product_link_list[i])

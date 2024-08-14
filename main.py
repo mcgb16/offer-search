@@ -5,6 +5,7 @@ import sites.pichau as pichau
 import sites.terabyte as terabyte
 import sites.magalu as magalu
 import sites.americanas as americanas
+import sites.mercado_livre as mercadolivre
 
 if __name__ == "__main__":
     input_search = input('Digite o que deseja procurar: ')
@@ -166,38 +167,76 @@ if __name__ == "__main__":
 
     # AMERICANAS
     
-    americanas_search = americanas.get_americanas_search_url(input_search, page='1')
-    americanas_html = get_requests_code.get_response(americanas_search)
+    # americanas_search = americanas.get_americanas_search_url(input_search, page='1')
+    # americanas_html = get_requests_code.get_response(americanas_search)
 
-    americanas_soup = scraper_code.Scraper(americanas_html)
+    # americanas_soup = scraper_code.Scraper(americanas_html)
     
-    americanas_product_name_tag, americanas_product_name_class = americanas.get_americanas_product_class_tag()
+    # americanas_product_name_tag, americanas_product_name_class = americanas.get_americanas_product_class_tag()
 
-    americanas_product_names_list = americanas_soup.get_text_all(americanas_product_name_tag, americanas_product_name_class)
+    # americanas_product_names_list = americanas_soup.get_text_all(americanas_product_name_tag, americanas_product_name_class)
 
-    americanas_old_price_tag, americanas_old_price_class = americanas.get_americanas_old_price_class_tag()
-    americanas_current_price_tag, americanas_current_price_class = americanas.get_americanas_current_price_class_tag()
-    americanas_all_prices_tag, americanas_all_prices_class = americanas.get_americanas_all_prices_class_tag()
+    # americanas_old_price_tag, americanas_old_price_class = americanas.get_americanas_old_price_class_tag()
+    # americanas_current_price_tag, americanas_current_price_class = americanas.get_americanas_current_price_class_tag()
+    # americanas_all_prices_tag, americanas_all_prices_class = americanas.get_americanas_all_prices_class_tag()
 
-    americanas_all_prices_list = americanas_soup.get_soup_all(americanas_all_prices_tag, americanas_all_prices_class)
-    americanas_current_price_list = []
-    americanas_old_price_list = []
+    # americanas_all_prices_list = americanas_soup.get_soup_all(americanas_all_prices_tag, americanas_all_prices_class)
+    # americanas_current_price_list = []
+    # americanas_old_price_list = []
 
-    for i in americanas_all_prices_list:
-        old_price_item = i.find(americanas_old_price_tag, attrs={"class":americanas_old_price_class})
-        current_price_item = i.find(americanas_current_price_tag, attrs={"class":americanas_current_price_class})
+    # for i in americanas_all_prices_list:
+    #     old_price_item = i.find(americanas_old_price_tag, attrs={"class":americanas_old_price_class})
+    #     current_price_item = i.find(americanas_current_price_tag, attrs={"class":americanas_current_price_class})
+    #     if old_price_item:
+    #         americanas_old_price_list.append(old_price_item.get_text())
+    #         americanas_current_price_list.append(current_price_item.get_text())
+    #     else:
+    #         americanas_old_price_list.append('')
+    #         americanas_current_price_list.append(current_price_item.get_text())            
+
+    # americanas_product_link_tag, americanas_product_link_class = americanas.get_americanas_product_link_class_tag()
+    # americanas_product_link_list = americanas_soup.get_href_all(americanas_product_link_tag, americanas_product_link_class)
+
+    # for i in range (15):
+    #     print(americanas_product_names_list[i])
+    #     print(americanas_old_price_list[i])
+    #     print(americanas_current_price_list[i])
+    #     print(americanas_product_link_list[i])
+
+    # MERCADO LIVRE
+    
+    mercadolivre_search = mercadolivre.get_mercadolivre_search_url(input_search, page='1')
+    mercadolivre_html = get_requests_code.get_response(mercadolivre_search)
+
+    mercadolivre_soup = scraper_code.Scraper(mercadolivre_html)
+    
+    mercadolivre_product_name_tag, mercadolivre_product_name_class = mercadolivre.get_mercadolivre_product_class_tag()
+
+    mercadolivre_product_names_list = mercadolivre_soup.get_text_all(mercadolivre_product_name_tag, mercadolivre_product_name_class)
+
+    mercadolivre_old_price_tag, mercadolivre_old_price_class = mercadolivre.get_mercadolivre_old_price_class_tag()
+    mercadolivre_current_price_tag, mercadolivre_current_price_class = mercadolivre.get_mercadolivre_current_price_class_tag()
+    mercadolivre_all_prices_tag, mercadolivre_all_prices_class = mercadolivre.get_mercadolivre_all_prices_class_tag()
+
+    mercadolivre_all_prices_list = mercadolivre_soup.get_soup_all(mercadolivre_all_prices_tag, mercadolivre_all_prices_class)
+    mercadolivre_current_price_list = []
+    mercadolivre_old_price_list = []
+
+    for i in mercadolivre_all_prices_list:
+        old_price_item = i.find(mercadolivre_old_price_tag, attrs={"class":mercadolivre_old_price_class})
+        current_price_item = i.find(mercadolivre_current_price_tag, attrs={"class":mercadolivre_current_price_class})
         if old_price_item:
-            americanas_old_price_list.append(old_price_item.get_text())
-            americanas_current_price_list.append(current_price_item.get_text())
+            mercadolivre_old_price_list.append(old_price_item.get_text())
+            mercadolivre_current_price_list.append(current_price_item.get_text())
         else:
-            americanas_old_price_list.append('')
-            americanas_current_price_list.append(current_price_item.get_text())            
+            mercadolivre_old_price_list.append('')
+            mercadolivre_current_price_list.append(current_price_item.get_text())            
 
-    americanas_product_link_tag, americanas_product_link_class = americanas.get_americanas_product_link_class_tag()
-    americanas_product_link_list = americanas_soup.get_href_all(americanas_product_link_tag, americanas_product_link_class)
+    mercadolivre_product_link_tag, mercadolivre_product_link_class = mercadolivre.get_mercadolivre_product_link_class_tag()
+    mercadolivre_product_link_list = mercadolivre_soup.get_href_all(mercadolivre_product_link_tag, mercadolivre_product_link_class)
 
     for i in range (15):
-        print(americanas_product_names_list[i])
-        print(americanas_old_price_list[i])
-        print(americanas_current_price_list[i])
-        print(americanas_product_link_list[i])
+        print(mercadolivre_product_names_list[i])
+        print(mercadolivre_old_price_list[i])
+        print(mercadolivre_current_price_list[i])
+        print(mercadolivre_product_link_list[i])

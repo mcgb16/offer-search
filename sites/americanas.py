@@ -30,3 +30,41 @@ def get_americanas_all_prices_class_tag() -> tuple:
 
 def get_americanas_product_link_class_tag() -> tuple:
     return americanas_html_specified['product_link']
+
+    # AMERICANAS
+    
+    # americanas_search = americanas.get_americanas_search_url(input_search, page='1')
+    # americanas_html = get_requests_code.get_response(americanas_search)
+
+    # americanas_soup = scraper_code.Scraper(americanas_html)
+    
+    # americanas_product_name_tag, americanas_product_name_class = americanas.get_americanas_product_class_tag()
+
+    # americanas_product_names_list = americanas_soup.get_text_all(americanas_product_name_tag, americanas_product_name_class)
+
+    # americanas_old_price_tag, americanas_old_price_class = americanas.get_americanas_old_price_class_tag()
+    # americanas_current_price_tag, americanas_current_price_class = americanas.get_americanas_current_price_class_tag()
+    # americanas_all_prices_tag, americanas_all_prices_class = americanas.get_americanas_all_prices_class_tag()
+
+    # americanas_all_prices_list = americanas_soup.get_soup_all(americanas_all_prices_tag, americanas_all_prices_class)
+    # americanas_current_price_list = []
+    # americanas_old_price_list = []
+
+    # for i in americanas_all_prices_list:
+    #     old_price_item = i.find(americanas_old_price_tag, attrs={"class":americanas_old_price_class})
+    #     current_price_item = i.find(americanas_current_price_tag, attrs={"class":americanas_current_price_class})
+    #     if old_price_item:
+    #         americanas_old_price_list.append(old_price_item.get_text())
+    #         americanas_current_price_list.append(current_price_item.get_text())
+    #     else:
+    #         americanas_old_price_list.append('')
+    #         americanas_current_price_list.append(current_price_item.get_text())            
+
+    # americanas_product_link_tag, americanas_product_link_class = americanas.get_americanas_product_link_class_tag()
+    # americanas_product_link_list = americanas_soup.get_href_all(americanas_product_link_tag, americanas_product_link_class)
+
+    # for i in range (15):
+    #     print(americanas_product_names_list[i])
+    #     print(americanas_old_price_list[i])
+    #     print(americanas_current_price_list[i])
+    #     print(americanas_product_link_list[i])

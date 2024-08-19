@@ -28,39 +28,38 @@ def get_kabum_soup(product, page) -> scraper_code.Scraper:
 
     return kbm_soup
 
-def get_kabum_product_names(soup) -> tuple:
+def get_kabum_product_names(soup) -> list:
     tag_name, class_name, search_type = kabum_html_specified['product_name']
 
     product_names = soup.get_text_all(tag_name, class_name, search_type)
     
     return product_names
 
-def get_kabum_old_prices(soup) -> tuple:
+# Mesmo em situações que não tenha "old_price", ou seja, produtos que não estejam na promoção, este componente possui um valor, porém é um valor "vazio", por isso é possível sempre ter noção de quais são os valores e seus respectivos descontos sem um tratamento de dados mais detalhado.
+def get_kabum_old_prices(soup) -> list:
     tag_name, class_name, search_type = kabum_html_specified['old_price']
 
     kabum_old_prices = soup.get_text_all(tag_name, class_name, search_type)
     
     return kabum_old_prices
 
-def get_kabum_current_prices(soup) -> tuple:
+def get_kabum_current_prices(soup) -> list:
     tag_name, class_name, search_type = kabum_html_specified['current_price']
 
     kabum_current_prices = soup.get_text_all(tag_name, class_name, search_type)
     
     return kabum_current_prices
 
-def get_kabum_discounts(soup) -> tuple:
+def get_kabum_discounts(soup) -> list:
     tag_name, class_name, search_type = kabum_html_specified['discount']
 
     kabum_discounts = soup.get_text_all(tag_name, class_name, search_type)
     
     return kabum_discounts
 
-def get_kabum_product_links(soup) -> tuple:
+def get_kabum_product_links(soup) -> list:
     tag_name, class_name, search_type = kabum_html_specified['product_link']
 
     kabum_product_links = soup.get_href_all(tag_name, class_name, search_type)
     
     return kabum_product_links
-
-# Mesmo em situações que não tenha "old_price", ou seja, produtos que não estejam na promoção, este componente possui um valor, porém é um valor "vazio", por isso é possível sempre ter noção de quais são os valores e seus respectivos descontos sem um tratamento de dados mais detalhado.

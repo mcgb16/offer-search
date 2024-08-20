@@ -52,7 +52,7 @@ def get_magalu_prices(all_prices) -> list:
     
     return old_prices, current_prices
 
-def get_magalu_all_prices(soup) -> scraper_code.bs4.element.ResultSet:
+def get_magalu_all_prices(soup) -> scraper_code.BeautifulSoup:
     tag_name, class_name, search_type = magalu_html_specified['all_prices']
 
     all_prices = soup.get_soup_all(tag_name, class_name, search_type)

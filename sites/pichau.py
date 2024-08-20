@@ -1,3 +1,6 @@
+import base_code.scraper_code as scraper_code
+import base_code.get_requests_code as get_requests_code
+
 pichau = {
     'initial_url': 'https://www.pichau.com.br/',
     'search': 'search?q=',
@@ -6,66 +9,60 @@ pichau = {
 }
 
 pichau_html_specified = {
-    'product_name' : ('h2','MuiTypography-h6'),
-    'old_price' : ('span', 'jss129'),
-    'current_price' : ('div', 'jss103'),
-    'all_prices' : ('div', 'jss115'),
-    'product_link' : ('a', 'jss16')
+    'product_name' : ('h2','MuiTypography-h6','class'),
+    'old_price' : ('span', 'jss129','class'),
+    'current_price' : ('div', 'jss103','class'),
+    'all_prices' : ('div', 'jss115','class'),
+    'product_link' : ('a', 'jss16','class')
 }
 
-def get_pichau_search_url(product, page) -> str:
+def get_pichau_soup(product, page) -> str:
     search_url = pichau['initial_url'] + pichau['search'] + product
-    return search_url
-
-def get_pichau_product_class_tag() -> tuple:
-    return pichau_html_specified['product_name']
-
-def get_pichau_old_price_class_tag() -> tuple:
-    return pichau_html_specified['old_price']
-
-def get_pichau_current_price_class_tag() -> tuple:
-    return pichau_html_specified['current_price']
-
-def get_pichau_all_prices_class_tag() -> tuple:
-    return pichau_html_specified['all_prices']
-
-def get_pichau_product_link_class_tag() -> tuple:
-    return pichau_html_specified['product_link']
-
-    #PICHAU
-
-    # pichau_search = pichau.get_pichau_search_url(input_search, page='1')
-    # pichau_html = get_requests_code.get_response(pichau_search)
-
-    # pichau_soup = scraper_code.Scraper(pichau_html)
     
-    # pichau_product_name_tag, pichau_product_name_class = pichau.get_pichau_product_class_tag()
+    pichau_html = get_requests_code.get_response(search_url)
 
-    # pichau_product_names_list = pichau_soup.get_text_all(pichau_product_name_tag, pichau_product_name_class)
+    pichau_soup = scraper_code.Scraper(pichau_html)
+    
+    return pichau_soup
 
-    # pichau_old_price_tag, pichau_old_price_class = pichau.get_pichau_old_price_class_tag()
-    # pichau_current_price_tag, pichau_current_price_class = pichau.get_pichau_current_price_class_tag()
-    # pichau_all_prices_tag, pichau_all_prices_class = pichau.get_pichau_all_prices_class_tag()
+def get_pichau_product_names(soup) -> list:
+    tag_name, class_name, search_type = pichau_html_specified['product_name']
 
-    # pichau_all_prices_list = pichau_soup.get_soup_all(pichau_all_prices_tag, pichau_all_prices_class)
-    # pichau_current_price_list = []
-    # pichau_old_price_list = []
+    product_names = soup.get_text_all(tag_name, class_name, search_type)
+    
+    return product_names
 
-    # for i in pichau_all_prices_list:
-    #     old_price_item = i.find(pichau_old_price_tag, pichau_old_price_class)
-    #     current_price_item = i.find(pichau_current_price_tag, pichau_current_price_class)
-    #     if old_price_item:
-    #         pichau_old_price_list.append(old_price_item.get_text())
-    #         pichau_current_price_list.append(current_price_item.get_text())
-    #     else:
-    #         pichau_old_price_list.append('')
-    #         pichau_current_price_list.append(current_price_item.get_text())            
+# É preciso fazer uma busca dentro do próprio "all prices" para ser possível distinguir de qual produto que é o preço original, visto que este componente não existe nos produtos sem promoção.
+def get_pichau_prices(all_prices) -> list:
+    old_price_tag_name, old_price_class_name, old_price_search_type = pichau_html_specified['old_price']
+    current_price_tag_name, current_price_class_name, current_price_search_type = pichau_html_specified['current_price']
 
-    # pichau_product_link_tag, pichau_product_link_class = pichau.get_pichau_product_link_class_tag()
-    # pichau_product_link_list = pichau_soup.get_href_all(pichau_product_link_tag, pichau_product_link_class)
+    old_prices = []
+    current_prices = []
 
-    # for i in range (36):
-    #     print(pichau_product_names_list[i])
-    #     print(pichau_old_price_list[i])
-    #     print(pichau_current_price_list[i])
-    #     print(pichau_product_link_list[i+8])
+    for i in all_prices:
+
+        old_price_item = i.find(old_price_tag_name, {old_price_search_type: old_price_class_name})
+        current_price_item = i.find(current_price_tag_name, {current_price_search_type: current_price_class_name})
+        if old_price_item:
+            old_prices.append(old_price_item.get_text())
+            current_prices.append(current_price_item.get_text())
+        else:
+            old_prices.append('')
+            current_prices.append(current_price_item.get_text())
+    
+    return old_prices, current_prices
+
+def get_pichau_all_prices(soup) -> scraper_code.BeautifulSoup:
+    tag_name, class_name, search_type = pichau_html_specified['all_prices']
+
+    all_prices = soup.get_soup_all(tag_name, class_name, search_type)
+    
+    return all_prices
+
+def get_pichau_product_links(soup) -> list:
+    tag_name, class_name, search_type = pichau_html_specified['product_link']
+
+    product_links = soup.get_href_all(tag_name, class_name, search_type)
+    
+    return product_links            

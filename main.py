@@ -38,3 +38,31 @@ if __name__ == "__main__":
     #     print(magalu_old_prices[i])
     #     print(magalu_current_prices[i])
     #     print(magalu_product_links[i])
+
+    # MERCADO LIVRE
+    
+    # mercadolivre_soup = mercadolivre.get_mercadolivre_soup(input_search, "1")
+    # mercadolivre_product_names = mercadolivre.get_mercadolivre_product_names(mercadolivre_soup)
+    # mercadolivre_all_prices = mercadolivre.get_mercadolivre_all_prices(mercadolivre_soup)
+    # mercadolivre_old_prices, mercadolivre_current_prices = mercadolivre.get_mercadolivre_prices(mercadolivre_all_prices)
+    # mercadolivre_product_links = mercadolivre.get_mercadolivre_product_links(mercadolivre_soup)
+
+    # for i in range(10):
+    #     print(mercadolivre_product_names[i])
+    #     print(mercadolivre_old_prices[i])
+    #     print(mercadolivre_current_prices[i])
+    #     print(mercadolivre_product_links[i])
+
+    # PICHAU
+    
+    pichau_soup = pichau.get_pichau_soup(input_search, "1")
+    pichau_product_names = pichau.get_pichau_product_names(pichau_soup)
+    pichau_all_prices = pichau.get_pichau_all_prices(pichau_soup)
+    pichau_old_prices, pichau_current_prices = pichau.get_pichau_prices(pichau_all_prices)
+    pichau_product_links = pichau.get_pichau_product_links(pichau_soup)
+
+    for i in range(10):
+        print(pichau_product_names[i])
+        print(pichau_old_prices[i])
+        print(pichau_current_prices[i])
+        print(pichau_product_links[i+8])

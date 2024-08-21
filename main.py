@@ -55,14 +55,28 @@ if __name__ == "__main__":
 
     # PICHAU
     
-    pichau_soup = pichau.get_pichau_soup(input_search, "1")
-    pichau_product_names = pichau.get_pichau_product_names(pichau_soup)
-    pichau_all_prices = pichau.get_pichau_all_prices(pichau_soup)
-    pichau_old_prices, pichau_current_prices = pichau.get_pichau_prices(pichau_all_prices)
-    pichau_product_links = pichau.get_pichau_product_links(pichau_soup)
+    # pichau_soup = pichau.get_pichau_soup(input_search, "1")
+    # pichau_product_names = pichau.get_pichau_product_names(pichau_soup)
+    # pichau_all_prices = pichau.get_pichau_all_prices(pichau_soup)
+    # pichau_old_prices, pichau_current_prices = pichau.get_pichau_prices(pichau_all_prices)
+    # pichau_product_links = pichau.get_pichau_product_links(pichau_soup)
+
+    # for i in range(10):
+    #     print(pichau_product_names[i])
+    #     print(pichau_old_prices[i])
+    #     print(pichau_current_prices[i])
+    #     print(pichau_product_links[i+8])
+
+    # TERABYTE
+    
+    terabyte_soup = terabyte.get_terabyte_soup(input_search, "1")
+    terabyte_product_names = terabyte.get_terabyte_product_names(terabyte_soup)
+    terabyte_all_prices = terabyte.get_terabyte_all_prices(terabyte_soup)
+    terabyte_old_prices, terabyte_current_prices = terabyte.get_terabyte_prices(terabyte_all_prices)
+    terabyte_product_links = terabyte.get_terabyte_product_links(terabyte_soup)
 
     for i in range(10):
-        print(pichau_product_names[i])
-        print(pichau_old_prices[i])
-        print(pichau_current_prices[i])
-        print(pichau_product_links[i+8])
+        print(terabyte_product_names[i])
+        print(terabyte_old_prices[i])
+        print(terabyte_current_prices[i])
+        print(terabyte_product_links[i])

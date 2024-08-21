@@ -16,7 +16,7 @@ pichau_html_specified = {
     'product_link' : ('a', 'jss16','class')
 }
 
-def get_pichau_soup(product, page) -> str:
+def get_pichau_soup(product, page) -> scraper_code.Scraper:
     search_url = pichau['initial_url'] + pichau['search'] + product
     
     pichau_html = get_requests_code.get_response(search_url)
@@ -65,4 +65,4 @@ def get_pichau_product_links(soup) -> list:
 
     product_links = soup.get_href_all(tag_name, class_name, search_type)
     
-    return product_links            
+    return product_links

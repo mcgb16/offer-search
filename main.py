@@ -69,14 +69,28 @@ if __name__ == "__main__":
 
     # TERABYTE
     
-    terabyte_soup = terabyte.get_terabyte_soup(input_search, "1")
-    terabyte_product_names = terabyte.get_terabyte_product_names(terabyte_soup)
-    terabyte_all_prices = terabyte.get_terabyte_all_prices(terabyte_soup)
-    terabyte_old_prices, terabyte_current_prices = terabyte.get_terabyte_prices(terabyte_all_prices)
-    terabyte_product_links = terabyte.get_terabyte_product_links(terabyte_soup)
+    # terabyte_soup = terabyte.get_terabyte_soup(input_search, "1")
+    # terabyte_product_names = terabyte.get_terabyte_product_names(terabyte_soup)
+    # terabyte_all_prices = terabyte.get_terabyte_all_prices(terabyte_soup)
+    # terabyte_old_prices, terabyte_current_prices = terabyte.get_terabyte_prices(terabyte_all_prices)
+    # terabyte_product_links = terabyte.get_terabyte_product_links(terabyte_soup)
+
+    # for i in range(10):
+    #     print(terabyte_product_names[i])
+    #     print(terabyte_old_prices[i])
+    #     print(terabyte_current_prices[i])
+    #     print(terabyte_product_links[i])
+    
+    # AMERICANAS
+    
+    americanas_soup = americanas.get_americanas_soup(input_search, "1")
+    americanas_product_names = americanas.get_americanas_product_names(americanas_soup)
+    americanas_all_prices = americanas.get_americanas_all_prices(americanas_soup)
+    americanas_old_prices, americanas_current_prices = americanas.get_americanas_prices(americanas_all_prices)
+    americanas_product_links = americanas.get_americanas_product_links(americanas_soup)
 
     for i in range(10):
-        print(terabyte_product_names[i])
-        print(terabyte_old_prices[i])
-        print(terabyte_current_prices[i])
-        print(terabyte_product_links[i])
+        print(americanas_product_names[i])
+        print(americanas_old_prices[i])
+        print(americanas_current_prices[i])
+        print(americanas_product_links[i])

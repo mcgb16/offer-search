@@ -10,24 +10,14 @@ def get_kabum_info(input_search) -> dict:
     kabum_product_names = kabum.get_kabum_product_names(kabum_soup)
     kabum_old_prices = kabum.get_kabum_old_prices(kabum_soup)
     kabum_current_prices = kabum.get_kabum_current_prices(kabum_soup)
-    kabum_discounts = kabum.get_kabum_discounts(kabum_soup, kabum_old_prices)
     kabum_product_links = kabum.get_kabum_product_links(kabum_soup)
 
     kabum_dict = {
         'product_names': kabum_product_names,
         'old_prices': kabum_old_prices,
         'current_prices': kabum_current_prices,
-        'discounts': kabum_discounts,
         'product_links': kabum_product_links,
     }
-
-    # for i in range(10):
-    #     print(kabum_product_names[i])
-    #     if kabum_old_prices[i] != '':
-    #         print(kabum_discounts[i])
-    #         print(kabum_old_prices[i])
-    #     print(kabum_current_prices[i])
-    #     print(kabum_product_links[i])
 
     return kabum_dict
 
@@ -44,11 +34,6 @@ def get_magalu_info(input_search) -> dict:
         'current_prices': magalu_current_prices,
         'product_links': magalu_product_links,
     }
-    # for i in range(10):
-    #     print(magalu_product_names[i])
-    #     print(magalu_old_prices[i])
-    #     print(magalu_current_prices[i])
-    #     print(magalu_product_links[i])
 
     return magalu_dict
 
@@ -65,11 +50,6 @@ def get_mercadolivre_info(input_search) -> dict:
         'current_prices': mercadolivre_current_prices,
         'product_links': mercadolivre_product_links,
     }
-    # for i in range(10):
-    #     print(mercadolivre_product_names[i])
-    #     print(mercadolivre_old_prices[i])
-    #     print(mercadolivre_current_prices[i])
-    #     print(mercadolivre_product_links[i])
 
     return mercadolivre_dict
 
@@ -86,11 +66,6 @@ def get_pichau_info(input_search) -> dict:
         'current_prices': pichau_current_prices,
         'product_links': pichau_product_links,
     }
-    # for i in range(10):
-    #     print(pichau_product_names[i])
-    #     print(pichau_old_prices[i])
-    #     print(pichau_current_prices[i])
-    #     print(pichau_product_links[i+8])
 
     return pichau_dict
 
@@ -107,11 +82,6 @@ def get_terabyte_info(input_search) -> dict:
         'current_prices': terabyte_current_prices,
         'product_links': terabyte_product_links,
     }
-    # for i in range(10):
-    #     print(terabyte_product_names[i])
-    #     print(terabyte_old_prices[i])
-    #     print(terabyte_current_prices[i])
-    #     print(terabyte_product_links[i])
 
     return terabyte_dict
     
@@ -128,11 +98,6 @@ def get_americanas_info(input_search) -> dict:
         'current_prices': americanas_current_prices,
         'product_links': americanas_product_links,
     }
-    # for i in range(10):
-    #     print(americanas_product_names[i])
-    #     print(americanas_old_prices[i])
-    #     print(americanas_current_prices[i])
-    #     print(americanas_product_links[i])
 
     return americanas_dict
 
@@ -140,14 +105,39 @@ if __name__ == "__main__":
     input_search = input('Digite o que deseja procurar: ')
 
     kabum_scraper = get_kabum_info(input_search)
-    magalu_scraper = get_magalu_info(input_search)
-    mercadolivre_scraper = get_mercadolivre_info(input_search)
-    pichau_scraper = get_pichau_info(input_search)
-    terabyte_scraper = get_terabyte_info(input_search)
+    # magalu_scraper = get_magalu_info(input_search)
+    # mercadolivre_scraper = get_mercadolivre_info(input_search)
+    # pichau_scraper = get_pichau_info(input_search)
+    # terabyte_scraper = get_terabyte_info(input_search)
     # americanas_scraper = get_americanas_info(input_search)
 
-    # for i in range(10):
-    #     print(kabum_scraper['product_names'][i])
-    #     print(kabum_scraper['old_prices'][i])
-    #     print(kabum_scraper['current_prices'][i])
-    #     print(kabum_scraper['product_links'][i])
+    for i in range(10):
+        print(kabum_scraper['product_names'][i])
+        print(kabum_scraper['old_prices'][i])
+        print(kabum_scraper['current_prices'][i])
+        print(kabum_scraper['product_links'][i])
+
+        # print(magalu_scraper['product_names'][i])
+        # print(magalu_scraper['old_prices'][i])
+        # print(magalu_scraper['current_prices'][i])
+        # print(magalu_scraper['product_links'][i])
+
+        # print(mercadolivre_scraper['product_names'][i])
+        # print(mercadolivre_scraper['old_prices'][i])
+        # print(mercadolivre_scraper['current_prices'][i])
+        # print(mercadolivre_scraper['product_links'][i])
+
+        # print(pichau_scraper['product_names'][i])
+        # print(pichau_scraper['old_prices'][i])
+        # print(pichau_scraper['current_prices'][i])
+        # print(pichau_scraper['product_links'][i+8])
+
+        # print(terabyte_scraper['product_names'][i])
+        # print(terabyte_scraper['old_prices'][i])
+        # print(terabyte_scraper['current_prices'][i])
+        # print(terabyte_scraper['product_links'][i])
+
+        # print(americanas_scraper['product_names'][i])
+        # print(americanas_scraper['old_prices'][i])
+        # print(americanas_scraper['current_prices'][i])
+        # print(americanas_scraper['product_links'][i])

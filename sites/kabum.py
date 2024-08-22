@@ -15,7 +15,6 @@ kabum_html_specified = {
     'product_name' : ('span','nameCard','class'),
     'old_price' : ('span', 'oldPriceCard','class'),
     'current_price' : ('span', 'priceCard','class'),
-    'discount' : ('div', 'discountTagCard','class'),
     'product_link' : ('a', 'productLink','class')
 }
 
@@ -49,13 +48,6 @@ def get_kabum_current_prices(soup) -> list:
     kabum_current_prices = soup.get_text_all(tag_name, class_name, search_type)
     
     return kabum_current_prices
-
-def get_kabum_discounts(soup) -> list:
-    tag_name, class_name, search_type = kabum_html_specified['discount']
-
-    kabum_discounts = soup.get_text_all(tag_name, class_name, search_type)
-    
-    return kabum_discounts
 
 def get_kabum_product_links(soup) -> list:
     tag_name, class_name, search_type = kabum_html_specified['product_link']

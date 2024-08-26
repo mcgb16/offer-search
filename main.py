@@ -4,6 +4,7 @@ import sites.terabyte as terabyte
 import sites.magalu as magalu
 import sites.americanas as americanas
 import sites.mercado_livre as mercadolivre
+import base_code.sheets_pd as sheets
 
 def get_kabum_info(input_search) -> dict:
     kabum_soup = kabum.get_kabum_soup(input_search, "1")
@@ -105,39 +106,50 @@ if __name__ == "__main__":
     input_search = input('Digite o que deseja procurar: ')
 
     kabum_scraper = get_kabum_info(input_search)
-    # magalu_scraper = get_magalu_info(input_search)
+    magalu_scraper = get_magalu_info(input_search)
     # mercadolivre_scraper = get_mercadolivre_info(input_search)
-    # pichau_scraper = get_pichau_info(input_search)
-    # terabyte_scraper = get_terabyte_info(input_search)
-    # americanas_scraper = get_americanas_info(input_search)
+    pichau_scraper = get_pichau_info(input_search)
+    terabyte_scraper = get_terabyte_info(input_search)
+    americanas_scraper = get_americanas_info(input_search)
 
-    for i in range(10):
-        print(kabum_scraper['product_names'][i])
-        print(kabum_scraper['old_prices'][i])
-        print(kabum_scraper['current_prices'][i])
-        print(kabum_scraper['product_links'][i])
+    all_sites_scrapers = {
+        "Loja": [],
+        "Nome do Produto": [],
+        "Preço Inicial": [],
+        "Preço Atual": [],
+        "Link do Produto": []
+    }
 
-        # print(magalu_scraper['product_names'][i])
-        # print(magalu_scraper['old_prices'][i])
-        # print(magalu_scraper['current_prices'][i])
-        # print(magalu_scraper['product_links'][i])
+    for i in range(20):
+        all_sites_scrapers['Loja'].append('Kabum')
+        all_sites_scrapers['Nome do Produto'].append(kabum_scraper['product_names'][i])
+        all_sites_scrapers['Preço Inicial'].append(kabum_scraper['old_prices'][i])
+        all_sites_scrapers['Preço Atual'].append(kabum_scraper['current_prices'][i])
+        all_sites_scrapers['Link do Produto'].append(kabum_scraper['product_links'][i])
 
-        # print(mercadolivre_scraper['product_names'][i])
-        # print(mercadolivre_scraper['old_prices'][i])
-        # print(mercadolivre_scraper['current_prices'][i])
-        # print(mercadolivre_scraper['product_links'][i])
 
-        # print(pichau_scraper['product_names'][i])
-        # print(pichau_scraper['old_prices'][i])
-        # print(pichau_scraper['current_prices'][i])
-        # print(pichau_scraper['product_links'][i+8])
+        all_sites_scrapers['Loja'].append('Magalu')
+        all_sites_scrapers['Nome do Produto'].append(magalu_scraper['product_names'][i])
+        all_sites_scrapers['Preço Inicial'].append(magalu_scraper['old_prices'][i])
+        all_sites_scrapers['Preço Atual'].append(magalu_scraper['current_prices'][i])
+        all_sites_scrapers['Link do Produto'].append(magalu_scraper['product_links'][i])
 
-        # print(terabyte_scraper['product_names'][i])
-        # print(terabyte_scraper['old_prices'][i])
-        # print(terabyte_scraper['current_prices'][i])
-        # print(terabyte_scraper['product_links'][i])
+        all_sites_scrapers['Loja'].append('Pichau')
+        all_sites_scrapers['Nome do Produto'].append(pichau_scraper['product_names'][i])
+        all_sites_scrapers['Preço Inicial'].append(pichau_scraper['old_prices'][i])
+        all_sites_scrapers['Preço Atual'].append(pichau_scraper['current_prices'][i])
+        all_sites_scrapers['Link do Produto'].append(pichau_scraper['product_links'][i+8])
 
-        # print(americanas_scraper['product_names'][i])
-        # print(americanas_scraper['old_prices'][i])
-        # print(americanas_scraper['current_prices'][i])
-        # print(americanas_scraper['product_links'][i])
+        all_sites_scrapers['Loja'].append('Terabyte')
+        all_sites_scrapers['Nome do Produto'].append(terabyte_scraper['product_names'][i])
+        all_sites_scrapers['Preço Inicial'].append(terabyte_scraper['old_prices'][i])
+        all_sites_scrapers['Preço Atual'].append(terabyte_scraper['current_prices'][i])
+        all_sites_scrapers['Link do Produto'].append(terabyte_scraper['product_links'][i])
+
+        all_sites_scrapers['Loja'].append('Americanas')
+        all_sites_scrapers['Nome do Produto'].append(americanas_scraper['product_names'][i+2])
+        all_sites_scrapers['Preço Inicial'].append(americanas_scraper['old_prices'][i+2])
+        all_sites_scrapers['Preço Atual'].append(americanas_scraper['current_prices'][i+2])
+        all_sites_scrapers['Link do Produto'].append(americanas_scraper['product_links'][i])
+
+    scraper_sheet = sheets.create_data_frame(all_sites_scrapers)
